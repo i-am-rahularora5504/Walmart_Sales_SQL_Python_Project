@@ -1,1 +1,4 @@
-# walmart_pandas_sql_project
+# Walmart Sales: SQL + Python Project
+
+## Overview
+![Walmart Logo](
