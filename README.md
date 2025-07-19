@@ -164,20 +164,38 @@ from walmart
 group by branch, category) as t1 where Ranking = 1
 ```
 
-**3. Find the busiest date for each branch based on number of transactions.**
+**3. Find the busiest day for each branch based on number of transactions. 
+    Also find at which day of the week , most transactions are completed .**
 ```sql
 select branch ,
-     date ,
-     day,
+     Day,
      No_of_Transaction
 from
 (select branch ,
-     date ,
+     dayname(date) as Day,
      count(invoice_id) as No_of_Transaction,
      rank() over (partition by branch order by count(invoice_id) desc) as ranking
 from walmart
-group by branch, date) as t1
+group by branch, Day) as t1
 where ranking = 1;
+```
+```sql
+select Day , 
+     sum(No_of_Transaction)
+     from(
+select branch ,
+     Day,
+     No_of_Transaction
+from
+(select branch ,
+     dayname(date) as Day,
+     count(invoice_id) as No_of_Transaction,
+     rank() over (partition by branch order by count(invoice_id) desc) as ranking
+from walmart
+group by branch, Day) as t1
+where ranking = 1)
+as t2 group by 1
+order by 2  desc;
 ```
 
 **4. Calculate the total quantity of items sold per payment method.**
@@ -256,7 +274,25 @@ CASE
 group by 1,2
 order by 1,3 desc;
 ```
-   
+
+**9. Which one of th following is the highest performing branch.
+Also how much above the avg. revenue produced by a branch.**
+
+```sql
+select branch ,
+     sum(total_price) as revenue 
+from walmart 
+group by branch 
+order by revenue desc;
+
+select avg(revenue)
+from(select branch ,
+     sum(total_price) as revenue 
+from walmart 
+group by branch 
+order by revenue desc)
+as t1;
+```
 ### 10. Project Publishing and Documentation
    - **Documentation**: Maintain well-structured documentation of the entire process in VScode(Jupyter Notebook-kernel) and mysql Workbench.
    - **Project Publishing**: Publish the completed project on GitHub or any other version control platform, including:
