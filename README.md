@@ -140,7 +140,7 @@ select min(quantity),max(quantity) from walmart;
 ```
 ### Business Problems
 
-**1.Find the different payment method and their number of transaction, number of quantity sold.**
+**1. Find the different payment method and their number of transaction, number of quantity sold.**
 ```sql
 select 
 payment_method ,
@@ -150,7 +150,7 @@ from walmart
 group by payment_method
 ```
 
-**2.Find the highest rated category in each branch displaying branch, category and avg rating.**
+**2. Find the highest rated category in each branch displaying branch, category and avg rating.**
 ```sql
 select branch,
      category,
@@ -164,7 +164,7 @@ from walmart
 group by branch, category) as t1 where Ranking = 1
 ```
 
-**3.Find the busiest date for each branch based on number of transactions.**
+**3. Find the busiest date for each branch based on number of transactions.**
 ```sql
 select branch ,
      date ,
@@ -180,7 +180,7 @@ group by branch, date) as t1
 where ranking = 1;
 ```
 
-**4.Calculate the total quantity of items sold per payment method.**
+**4. Calculate the total quantity of items sold per payment method.**
 ```sql
 select payment_method,
      sum(quantity) as Total_quantity
@@ -188,7 +188,7 @@ from walmart
 group by payment_method;
 ```
 
-**5.Determine the average, minimum and maximum rating of category for each city.
+**5. Determine the average, minimum and maximum rating of category for each city.
 List the city, category, average_rating,minimum_rating and maximum_rating.**
 ```sql
 select city,
@@ -200,7 +200,7 @@ from walmart
 group by city, category;
 ```
 
-**6.Calculate the total profit for each category. 
+**6. Calculate the total profit for each category. 
 List total_profit and category ordered from hghest to lowest.**
 ```sql
 select category , 
@@ -209,7 +209,7 @@ from walmart group by category
 order by 2 desc;
 ```
 
-**7.Display the most common payment method for each branch. 
+**7. Display the most common payment method for each branch. 
 list the branch and preffered_payment_method.**
 ```sql
 select branch ,
@@ -237,7 +237,7 @@ select * from cte where
 Ranking =1;
 ```
 
-**8.categorize sales into three groups MORING, AFTERNOON, EVENING
+**8. Categorize sales into three groups MORING, AFTERNOON, EVENING
 Find out each of the shift for different branch and their no. of invoices.**
 ```sql
 select branch ,
